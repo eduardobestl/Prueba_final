@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.com">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenidos - Capacitaciones</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <div th:replace="~{menu :: navegacion}"></div>
+
+  <div class="container">
+    <h2>Crear Capacitaciones</h2>
+  </div>
+  <div class="container">
+     <form class ="form" method="post" th:action="@{/capacitacion/create}">
+      <div class="row">
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="id">Id:</label>
+            <input th:if="${op=='r'}" class="form-control" type="text"
+                   id="id" name="id" disabled
+                   th:value="${capacitacion.getId()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="name">Nombre:</label>
+              <input th:if="${op=='c'}" class="form-control" type="text"
+                     id="name" name="name">
+              <input th:if="${op=='r'}" class="form-control" type="text"
+                     id="name" name="name" disabled
+                     th:value="${capacitacion.getNombre()}">
+              <input th:if="${op=='u'}" class="form-control"
+                     type="text" id="name" name="name"
+                     th:value="${capacitacion.getNombre()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="detail">Detalle:</label>
+            <input th:if="${op=='c'}" class="form-control" type="text"
+                   id="detail" name="detail">
+            <input th:if="${op=='r'}" class="form-control" type="text" disabled
+                   id="detail" name="detail"
+                   th:value="${capacitacion.getDetalle()}">
+            <input th:if="${op=='u'}" class="form-control" type="text"
+                   id="detail" name="detail"
+                   th:value="${capacitacion.getDetalle()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="dates">Fecha:</label>
+            <input th:if="${op=='c'}" class="form-control" type="date"
+                   id="dates" name="dates">
+            <input th:if="${op=='r'}" class="form-control" type="date"
+                   id="dates" name="dates" disabled
+                   th:value="${capacitacion.getFecha()}">
+            <input th:if="${op=='u'}" class="form-control" type="date"
+                   id="dates" name="dates"
+                   th:value="${capacitacion.getFecha()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="times">Hora:</label>
+            <input th:if="${op=='c'}"  class="form-control" type="time"
+                   id="times" name="times">
+            <input th:if="${op=='r'}"  class="form-control" type="time" disabled
+                   id="times" name="times" th:value="${capacitacion.getHora()}">
+            <input th:if="${op=='u'}"  class="form-control" type="time"
+                   id="times" name="times" th:value="${capacitacion.getHora()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="place">Lugar:</label>
+            <input th:if="${op=='c'}"  class="form-control" type="text"
+                   id="place" name="place">
+            <input th:if="${op=='r'}"  class="form-control" type="text"
+                   id="place" name="place" disabled
+                   th:value="${capacitacion.getLugar()}">
+            <input th:if="${op=='u'}"  class="form-control" type="text"
+                   id="place" name="place"
+                   th:value="${capacitacion.getLugar()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="duration">Duración:</label>
+            <input th:if="${op=='c'}"  class="form-control" type="number"
+                   id="duration" name="duration">
+            <input th:if="${op=='r'}"  class="form-control" type="number"
+                   id="duration" name="duration" disabled
+                   th:value="${capacitacion.getDuracion()}">
+            <input th:if="${op=='u'}"  class="form-control" type="number"
+                   id="duration" name="duration"
+                   th:value="${capacitacion.getDuracion()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="quantity">Cantidad:</label>
+            <input th:if="${op=='c'}"  class="form-control" type="number"
+                   id="quantity" name="quantity">
+            <input th:if="${op=='r'}"  class="form-control" type="number"
+                   id="quantity" name="quantity" disabled
+                   th:value="${capacitacion.getCantidad()}">
+            <input th:if="${op=='u'}"  class="form-control" type="number"
+                   id="quantity" name="quantity"
+                   th:value="${capacitacion.getCantidad()}">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label" for="customerId">Cliente Id:</label>
+            <input th:if="${op=='r'}"  class="form-control" type="number"
+                   disabled
+                   id="customerId" name="customerId"
+            th:value="${capacitacion.getClienteId()}">
+            <input th:if="${op=='u'}"  class="form-control" type="number"
+                   id="customerId" name="customerId"
+            th:value="${capacitacion.getCliente.getNombre}">
+
+            <select class = "form-select" id ="customerId" name="customerId"
+                    type="number" >
+              <option th:each ="customer :${customers}" th:text
+                      ="${customer.getName()}" th:value="${customer.getId()}">
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row pt-4">
+        <div class="col">
+          <a href="/capacitacion" class="btn btn-secondary">Volver</a>
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div th:replace="~{footer :: footer}"></div>
+</div>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</html>
